@@ -576,7 +576,7 @@ def run_inference(args):
             attack_text,image_clean,image_attack,epoch = vllama_attack_train(conv = chat_state, video = video, model = model, args=args, question=question)
         elif args.type == 'attack_random':
             attack_text,image_clean,image_attack,epoch = attack_random(conv = chat_state, video = video, model = model, args=args, question=question)
-        
+        attack_text=attack_text.strip().replace('\n',' ').strip()
         with open(os.path.join(args.output_dir, save_path, f"attack.csv"), 'a', encoding='utf-8',newline='') as f:
             writer = csv.writer(f)
             writer.writerow([sample['video_name'], attack_text])
